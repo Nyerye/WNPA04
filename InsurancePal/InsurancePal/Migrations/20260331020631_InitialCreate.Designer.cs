@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsurancePal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260331020230_InitialCreate")]
+    [Migration("20260331020631_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -42,7 +42,8 @@ namespace InsurancePal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("EstimatedValue")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()

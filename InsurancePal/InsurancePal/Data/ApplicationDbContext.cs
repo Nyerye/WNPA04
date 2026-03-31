@@ -14,6 +14,19 @@ namespace InsurancePal.Data
 
         }
 
+        /// <summary>
+        /// Method that sets the precison for the Microsoft Entity Framework to apply to the EstimatedValue property for Item class.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Item>()
+                .Property(i => i.EstimatedValue)
+                .HasPrecision(10, 2);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         //DbSet property for the Item model, which allows for querying and saving instances of the Item class.
         //Allows for the database to make an Items table.
         public DbSet<Item> Items { get; set; }
