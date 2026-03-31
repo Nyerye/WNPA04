@@ -120,6 +120,10 @@ namespace InsurancePal.Models
             }
         }
 
+      public Item()
+        {
+
+        }
       public Item (int itemid, string name, string category, string room, decimal estimatedvalue, DateTime purchasedate, string description)
         {
             this.itemid = itemid;
