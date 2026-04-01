@@ -86,6 +86,7 @@ namespace InsurancePal.Models
             }
         }
 
+        [Display(Name = "Estimated Value")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal EstimatedValue
         {
@@ -99,6 +100,7 @@ namespace InsurancePal.Models
             }
         }
 
+        [Display(Name = "Purchased Date")]
         [DataType(DataType.Date)]
         public DateTime purchasedDate
         {
