@@ -18,6 +18,10 @@
 /// (Sixth, Ser. Deitel Development Series). Pearson Education.
 /// </references>
 /// 
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace InsurancePal.Models
 {
     public class Item
@@ -81,6 +85,7 @@ namespace InsurancePal.Models
             }
         }
 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal EstimatedValue
         {
             get
@@ -93,6 +98,7 @@ namespace InsurancePal.Models
             }
         }
 
+        [DataType(DataType.Date)]
         public DateTime purchasedDate
         {
             get

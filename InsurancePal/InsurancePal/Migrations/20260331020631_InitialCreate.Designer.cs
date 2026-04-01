@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InsurancePal.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ItemContext))]
     [Migration("20260331020631_InitialCreate")]
     partial class InitialCreate
     {
