@@ -20,9 +20,10 @@ namespace InsurancePal.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Room = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EstimatedValue = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    EstimatedValue = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     purchasedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -33,7 +33,7 @@ namespace InsurancePal.Models
         private decimal estimatedvalue;
         private DateTime purchasedate;
         private string description;
-        private string userid;
+        private string ownerid;
 
         public int ItemId
         {
@@ -127,15 +127,15 @@ namespace InsurancePal.Models
             }
         }
 
-        public string UserID
+        public string OwnerID
         {
             get
             {
-                return userid;
+                return ownerid;
             }
             set
             {
-                userid = value;
+                ownerid = value;
 
             }
         }
