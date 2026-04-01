@@ -33,6 +33,7 @@ namespace InsurancePal.Models
         private decimal estimatedvalue;
         private DateTime purchasedate;
         private string description;
+        private string userid;
 
         public int ItemId
         {
@@ -126,11 +127,24 @@ namespace InsurancePal.Models
             }
         }
 
+        public string UserID
+        {
+            get
+            {
+                return userid;
+            }
+            set
+            {
+                userid = value;
+
+            }
+        }
+
       public Item()
         {
 
         }
-      public Item (int itemid, string name, string category, string room, decimal estimatedvalue, DateTime purchasedate, string description)
+        public Item(int itemid, string name, string category, string room, decimal estimatedvalue, DateTime purchasedate, string description)
         {
             this.itemid = itemid;
             this.name = name;
