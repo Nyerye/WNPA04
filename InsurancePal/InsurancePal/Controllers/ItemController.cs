@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InsurancePal.Data;
 using InsurancePal.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 
 namespace InsurancePal.Controllers
 {
@@ -54,10 +55,14 @@ namespace InsurancePal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,Name,Category,Room,EstimatedValue,purchasedDate,Description,OwnerID")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemId,Name,Category,Room,EstimatedValue,purchasedDate,Description")] Item item)
         {
+
+            item.OwnerID = "TEMP_USER";
+            ModelState.Remove("OwnerID");
             if (ModelState.IsValid)
             {
+                
                 _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
