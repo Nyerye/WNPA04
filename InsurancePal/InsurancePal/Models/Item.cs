@@ -129,6 +129,7 @@ namespace InsurancePal.Models
             }
         }
 
+        [Display(Name = "Owner ID")]
         public string OwnerID
         {
             get
