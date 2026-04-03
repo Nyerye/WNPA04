@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using InsurancePal.Data;
 using InsurancePal.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InsurancePal.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         private readonly ItemContext _context;
@@ -58,7 +60,7 @@ namespace InsurancePal.Controllers
         public async Task<IActionResult> Create([Bind("ItemId,Name,Category,Room,EstimatedValue,purchasedDate,Description")] Item item)
         {
 
-            item.OwnerID = "TEMP_USER";
+            item.OwnerID = User.Identity.Name;
             ModelState.Remove("OwnerID");
             if (ModelState.IsValid)
             {

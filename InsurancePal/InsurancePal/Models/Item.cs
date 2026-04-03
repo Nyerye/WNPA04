@@ -147,15 +147,5 @@ namespace InsurancePal.Models
         {
 
         }
-        public Item(int itemid, string name, string category, string room, decimal estimatedvalue, DateTime purchasedate, string description)
-        {
-            this.itemid = itemid;
-            this.name = name;
-            this.category = category;
-            this.room = room;
-            this.estimatedvalue = estimatedvalue;
-            this.purchasedate = purchasedate;
-            this.description = description;
-        }
     }
 }
