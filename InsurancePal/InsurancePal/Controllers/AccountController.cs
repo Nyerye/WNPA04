@@ -20,7 +20,7 @@ public class AccountController : Controller
             return View(model);
 
         // Hardcoded user validation for demonstration purposes
-        if (model.Username == "nick" && model.Password == "1234")
+        if ((model.Username == "nick" && model.Password == "1234") || (model.Username == "norbert" && model.Password == "5678"))
         {
             var claims = new List<Claim>
             {
