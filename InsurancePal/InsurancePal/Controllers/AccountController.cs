@@ -18,20 +18,31 @@
 /// (Sixth, Ser. Deitel Development Series). Pearson Education.
 /// </references>
 /// 
+
+using InsurancePal.Data;
+using InsurancePal.Models;
 using InsurancePal.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Security.Claims;
 
 namespace InsurancePal.Controllers
 {
-    /// <summary>
-    /// AccountController class. Methods for logging in and out.
-    /// </summary>
     public class AccountController : Controller
     {
+        private readonly UserContext _context;
+        private readonly PasswordHasher<User> _passwordHasher = new();
+
+        public AccountController(UserContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string? returnUrl = null)
@@ -52,11 +63,22 @@ namespace InsurancePal.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            bool validUser =
-                (model.Username == "Nick" && model.Password == "1234") ||
-                (model.Username == "Norbert" && model.Password == "5678");
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == model.Username);
 
-            if (!validUser)
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Invalid username or password.");
+                return View(model);
+            }
+
+            var result = _passwordHasher.VerifyHashedPassword(
+                user,
+                user.PasswordHash,
+                model.Password
+            );
+
+            if (result == PasswordVerificationResult.Failed)
             {
                 ModelState.AddModelError("", "Invalid username or password.");
                 return View(model);
@@ -64,12 +86,13 @@ namespace InsurancePal.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, model.Username)
+                new Claim(ClaimTypes.Name, user.Username)
             };
 
             var identity = new ClaimsIdentity(
                 claims,
-                CookieAuthenticationDefaults.AuthenticationScheme);
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
 
             var principal = new ClaimsPrincipal(identity);
 
@@ -82,12 +105,11 @@ namespace InsurancePal.Controllers
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 principal,
-                authProperties);
+                authProperties
+            );
 
             if (!string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-            {
                 return LocalRedirect(model.ReturnUrl);
-            }
 
             return RedirectToAction("Index", "Home");
         }
