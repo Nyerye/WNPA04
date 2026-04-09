@@ -1,14 +1,38 @@
-﻿@model InsurancePal.Models.ViewModels.LoginViewModel
+﻿<!--
+/// <file>
+/// Login.cshtml
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// View for the lgoin page for users to log in to the application.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+///
+-->
+@model InsurancePal.Models.ViewModels.LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
 }
 
+<!--Block for the main Login portion of page-->
 <h2>Login</h2>
 
 <form asp-action="Login" method="post">
     <input asp-for="ReturnUrl" type="hidden" />
 
+    <!-- Username block-->
     <div class="mb-3">
         <label asp-for="Username" class="form-label"></label>
         <input asp-for="Username" class="form-control" />

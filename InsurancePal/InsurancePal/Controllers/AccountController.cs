@@ -1,4 +1,24 @@
-﻿using InsurancePal.Models.ViewModels;
+﻿/// <file>
+/// AccountController.cs
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// Controller for user account management and login management.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition* 
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+/// 
+using InsurancePal.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +27,9 @@ using System.Security.Claims;
 
 namespace InsurancePal.Controllers
 {
+    /// <summary>
+    /// AccountController class. Methods for logging in and out.
+    /// </summary>
     public class AccountController : Controller
     {
         [HttpGet]

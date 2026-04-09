@@ -11,7 +11,7 @@
 /// March 28 2026
 /// </date>
 /// <description>
-/// 
+/// Class file that holds the definition for the Item class.
 /// </description>
 /// <references>
 /// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition* 
@@ -24,6 +24,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InsurancePal.Models
 {
+    /// <summary>
+    /// Item class that defines what am item is and its properties.
+    /// </summary>
     public class Item
     {
         private int itemid;
@@ -143,6 +146,9 @@ namespace InsurancePal.Models
             }
         }
 
+      /// <summary>
+      /// Empty constructor that is used for the DBContext. This allows for easy creation.
+      /// </summary>
       public Item()
         {
 
