@@ -1,4 +1,26 @@
-﻿@model InsurancePal.Models.Item
+﻿<!-- 
+/// <file>
+/// Edit.cshtml
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// Edit view for modifying existing items.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+///
+-->
+@model InsurancePal.Models.Item
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,6 +30,8 @@
 
 <h4>Item</h4>
 <hr />
+
+<!-- Block that shows the Edit mini menu-->
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -51,6 +75,7 @@
     </div>
 </div>
 
+<!-- Button for going back to the main view area for Items.-->
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

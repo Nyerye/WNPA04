@@ -1,9 +1,32 @@
-﻿@model InsurancePal.Models.Item
+﻿<!--
+/// <file>
+/// Create.cshtml
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// View for the Create window for making Items to store in the database.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+///
+-->
+@model InsurancePal.Models.Item
 
 @{
     ViewData["Title"] = "Create";
 }
 
+<!-- Block for the Create menu-->
 <h1>Create</h1>
 
 <h4>Item</h4>
@@ -42,7 +65,8 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            
+         
+            <!-- Block for the Create button-->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -50,6 +74,7 @@
     </div>
 </div>
 
+<!-- Block for the Back to List button-->
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

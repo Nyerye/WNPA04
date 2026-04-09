@@ -1,9 +1,33 @@
-﻿@model InsurancePal.Models.Item
+﻿<!--
+/// <file>
+/// Details.cshtml
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// Details view for displaying item information.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+///
+-->
+@model InsurancePal.Models.Item
 
 @{
     ViewData["Title"] = "Details";
 }
 
+
+<!-- View for the Details window.-->
 <h1>Details</h1>
 
 <div>
@@ -49,6 +73,8 @@
         
     </dl>
 </div>
+
+<!-- Button for going back to the original Items view.-->
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ItemId">Edit</a> |
     <a asp-action="Index">Back to List</a>

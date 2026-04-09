@@ -1,3 +1,24 @@
+/// <file>
+/// Program.cs
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// Main file that builds and runs the application.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition* 
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+/// 
+
 using InsurancePal.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +27,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+//Build in the services for cookie authentication, which will allow for the use of cookies to manage user authentication and authorization in the application.
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -20,6 +42,7 @@ builder.Services
 
 builder.Services.AddAuthorization();
 
+//Give the application access to the ItemContext class. This allows the manipulation of the classes.
 builder.Services.AddDbContext<ItemContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -39,6 +62,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+//Set the default route for the app when the user logs in.
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

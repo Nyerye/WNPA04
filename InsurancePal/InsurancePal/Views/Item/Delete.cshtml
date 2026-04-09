@@ -1,9 +1,32 @@
-﻿@model InsurancePal.Models.Item
+﻿<!--
+/// <file>
+/// Delete.cshtml
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+/// VIew for deleting items from the inventory list.
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+///
+-->
+@model InsurancePal.Models.Item
 
 @{
     ViewData["Title"] = "Delete";
 }
 
+<!-- Block for the Delete confirmation -->
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -50,6 +73,7 @@
         
     </dl>
     
+    <!-- Block made for the 2 buttons Delete and Back to List. Delete removes item from db, back to list returns to Item view.-->
     <form asp-action="Delete">
         <input type="hidden" asp-for="ItemId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

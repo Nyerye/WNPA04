@@ -1,4 +1,26 @@
-﻿@model IEnumerable<InsurancePal.Models.Item>
+﻿<!--
+/// <file>
+/// Index.cshtml
+/// </file>
+/// <project>
+/// Windows Network Programming Assignment 4
+/// </project>
+/// <author>
+/// Nicholas Reilly
+/// </author>
+/// <date>
+/// April 9 2026
+/// </date>
+/// <description>
+///Index view files that has the styling and layout for when the user is on the Item page
+/// </description>
+/// <references>
+/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
+/// (Sixth, Ser. Deitel Development Series). Pearson Education.
+/// </references>
+///
+-->
+@model IEnumerable<InsurancePal.Models.Item>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,6 +28,7 @@
 
 <h1>Index</h1>
 
+<!-- BLock for creating a new item.-->
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -34,6 +57,8 @@
         </tr>
     </thead>
     <tbody>
+
+        <!--Code for displaying the objects that are from the InsurancePalDB-->
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -55,6 +80,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
+                <!--Actions on the side on the object in the view for the final crud operations-->
                 <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
