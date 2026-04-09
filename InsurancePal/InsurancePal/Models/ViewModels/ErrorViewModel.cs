@@ -18,7 +18,7 @@
 /// (Sixth, Ser. Deitel Development Series). Pearson Education.
 /// </references>
 /// 
-namespace InsurancePal.Models
+namespace InsurancePal.Models.ViewModels
 {
     public class ErrorViewModel
     {
