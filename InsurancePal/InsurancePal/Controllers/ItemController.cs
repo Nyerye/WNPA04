@@ -25,6 +25,8 @@ namespace InsurancePal.Controllers
         // GET: Item
         public async Task<IActionResult> Index()
         {
+            //Try to find items in the database that match the signed in users username with dbo.Items
+            //Will return a list of items that have a match with the OwnerID column.
             try
             {
                 var username = User.Identity?.Name;

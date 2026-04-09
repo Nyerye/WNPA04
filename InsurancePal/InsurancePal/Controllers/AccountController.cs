@@ -30,8 +30,8 @@ namespace InsurancePal.Controllers
                 return View(model);
 
             bool validUser =
-                (model.Username == "nick" && model.Password == "1234") ||
-                (model.Username == "norbert" && model.Password == "5678");
+                (model.Username == "Nick" && model.Password == "1234") ||
+                (model.Username == "Norbert" && model.Password == "5678");
 
             if (!validUser)
             {
