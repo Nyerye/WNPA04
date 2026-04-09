@@ -25,9 +25,21 @@ namespace InsurancePal.Controllers
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Items.ToListAsync());
-        }
+            try
+            {
+                var username = User.Identity?.Name;
 
+                var items = await _context.Items
+                    .Where(i => i.OwnerID == username)
+                    .ToListAsync();
+
+                return View(items);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.ToString());
+            }
+        }
         // GET: Item/Details/5
         public async Task<IActionResult> Details(int? id)
         {

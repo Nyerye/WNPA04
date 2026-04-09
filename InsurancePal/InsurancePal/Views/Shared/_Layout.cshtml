@@ -36,7 +36,34 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted"<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </li>
+
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+            <li class="nav-item">
+                <span class="nav-link text-dark">Hello, @User.Identity.Name</span>
+            </li>
+            <li class="nav-item">
+                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-link nav-link text-dark p-0 border-0">
+                        Logout
+                    </button>
+                </form>
+            </li>
+    }
+    else
+    {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+            </li>
+    }
+</ul>
         <div class="container">
             &copy; 2026 - InsurancePal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

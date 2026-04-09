@@ -1,19 +1,31 @@
 ﻿@model InsurancePal.Models.ViewModels.LoginViewModel
 
+@{
+    ViewData["Title"] = "Login";
+}
+
 <h2>Login</h2>
 
 <form asp-action="Login" method="post">
-    <div>
-        <label>Username</label>
-        <input asp-for="Username" />
+    <input asp-for="ReturnUrl" type="hidden" />
+
+    <div class="mb-3">
+        <label asp-for="Username" class="form-label"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
     </div>
 
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" type="password" />
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
-    <button type="submit">Login</button>
+    <button type="submit" class="btn btn-primary">Login</button>
 </form>
 
-@Html.ValidationSummary(false, "", new { style = "color:red;" })
+<div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
