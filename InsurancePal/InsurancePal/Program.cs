@@ -41,7 +41,11 @@ builder.Services
         options.SlidingExpiration = true;
     });
 
-builder.Services.AddAuthorization();
+//Challenge all Authorize blocks unless I wrote AllowAnnoymous. This adds security for accessing pages via URL manipulation.
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = options.DefaultPolicy;
+});
 
 //Give the application access to the ItemContext class. This allows the manipulation of the classes.
 builder.Services.AddDbContext<ItemContext>(options =>

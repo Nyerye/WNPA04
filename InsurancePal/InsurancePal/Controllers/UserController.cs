@@ -24,11 +24,15 @@ using System;
 using InsurancePal.Models;
 using InsurancePal.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 /// <summary>
 /// UserController class. Has methods for creating a new user. Different from AccountController as it processes logins and cookie creation.
 /// </summary>
+/// 
+
+[Authorize]
 public class UserController : Controller
 {
     private readonly UserContext _context;
