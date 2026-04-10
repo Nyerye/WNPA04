@@ -37,15 +37,27 @@ builder.Services
         options.LogoutPath = "/Account/Logout";
         options.AccessDeniedPath = "/Account/Login";
         options.Cookie.Name = "InsurancePalAuth";
+
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         options.SlidingExpiration = true;
+
+        
+        options.Cookie.IsEssential = true;
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+
+        //Make the cookie only last the session and have a 5 min timeout
+        options.Cookie.MaxAge = null; 
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5); 
     });
 
-//Challenge all Authorize blocks unless I wrote AllowAnnoymous. This adds security for accessing pages via URL manipulation.
+
+//Challenge all Authorize blocks unless I wrote AllowAnnoymous. This al
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = options.DefaultPolicy;
 });
+
 
 //Give the application access to the ItemContext class. This allows the manipulation of the classes.
 builder.Services.AddDbContext<ItemContext>(options =>
