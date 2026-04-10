@@ -32,15 +32,21 @@ using Microsoft.AspNetCore.Authorization;
 /// </summary>
 /// 
 
-[Authorize]
-public class UserController : Controller
+[Authorize(Policy = "AdminOnly")]
+public class UsersController : Controller
 {
     private readonly UserContext _context;
     private readonly PasswordHasher<User> _passwordHasher = new();
 
-    public UserController(UserContext context)
+    public UsersController(UserContext context)
     {
         _context = context;
+    }
+
+    public IActionResult Index()
+    {
+        var users = _context.Users.ToList();
+        return View(users);
     }
 
     [HttpGet]

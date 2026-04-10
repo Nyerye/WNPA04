@@ -52,10 +52,15 @@ builder.Services
     });
 
 
-//Challenge all Authorize blocks unless I wrote AllowAnnoymous. This al
+//Challenge all Authorize blocks unless I wrote AllowAnonymous. This al
 builder.Services.AddAuthorization(options =>
 {
+    //Policy that challenges anyone trying to access resources behind the Login page
     options.FallbackPolicy = options.DefaultPolicy;
+
+    //Policy that challenges a user trying to access resources open only to Admins.
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin", "true"));
+
 });
 
 
