@@ -86,8 +86,12 @@ namespace InsurancePal.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim("IsAdmin", user.IsAdmin.ToString().ToLower())
+
             };
+
+
 
             var identity = new ClaimsIdentity(
                 claims,
