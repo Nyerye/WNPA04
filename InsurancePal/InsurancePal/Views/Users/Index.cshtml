@@ -2,6 +2,10 @@
 
 <h1>Users</h1>
 
+<p>
+    <a class="btn btn-success" asp-action="Create">Create User</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -15,6 +19,11 @@
             <tr>
                 <td>@user.Username</td>
                 <td>@user.IsAdmin</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@user.Id">Reset Password</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                </td>
+
             </tr>
         }
     </tbody>

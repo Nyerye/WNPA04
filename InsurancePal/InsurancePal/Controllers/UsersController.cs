@@ -76,4 +76,56 @@ public class UsersController : Controller
 
         return RedirectToAction("Index", "Home");
     }
+
+    public IActionResult Edit(int id)
+    {
+        var user = _context.Users.Find(id);
+        if (user == null)
+            return NotFound();
+
+        return View(user);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, string password)
+    {
+        var user = _context.Users.Find(id);
+        if (user == null)
+            return NotFound();
+
+        var hasher = new PasswordHasher<User>();
+        user.PasswordHash = hasher.HashPassword(user, password);
+
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Delete(int id)
+    {
+        var user = _context.Users.Find(id);
+        if (user == null)
+            return NotFound();
+
+        return View(user);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteConfirmed(int id)
+    {
+        var user = _context.Users.Find(id);
+        if (user == null)
+            return NotFound();
+
+        _context.Users.Remove(user);
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+    }
+
+
+
+
 }
