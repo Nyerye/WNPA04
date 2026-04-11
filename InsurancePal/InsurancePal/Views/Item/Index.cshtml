@@ -12,13 +12,12 @@
 /// April 9 2026
 /// </date>
 /// <description>
-///Index view files that has the styling and layout for when the user is on the Item page
+/// Index view file that has the styling and layout for when the user is on the Item page.
 /// </description>
 /// <references>
 /// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
 /// (Sixth, Ser. Deitel Development Series). Pearson Education.
 /// </references>
-///
 -->
 @model IEnumerable<InsurancePal.Models.Item>
 
@@ -26,59 +25,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="mb-4">Your Items:</h1>
+<div class="container mt-4">
 
-<!-- BLock for creating a new item.-->
-<p>
-    <a asp-action="Create" class="btn btn-primary btn-sm">Create New</a>
-</p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">Your Items</h1>
 
-<table class="table table-striped table-bordered align-middle">
-    <thead class="table-light">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Category)</th>
-            <th>@Html.DisplayNameFor(model => model.Room)</th>
-            <th>@Html.DisplayNameFor(model => model.EstimatedValue)</th>
-            <th>@Html.DisplayNameFor(model => model.purchasedDate)</th>
-            <th>@Html.DisplayNameFor(model => model.Description)</th>
-            <th style="width: 240px;">Actions</th>
-        </tr>
-    </thead>
+        <a asp-action="Create" class="btn btn-primary btn-lg px-4">
+            + Create New
+        </a>
+    </div>
 
-    <tbody>
-        <!--Code for displaying the objects that are from the InsurancePalDB-->
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Category)</td>
-                <td>@Html.DisplayFor(modelItem => item.Room)</td>
-                <td>@Html.DisplayFor(modelItem => item.EstimatedValue)</td>
-                <td>@Html.DisplayFor(modelItem => item.purchasedDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-striped table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Category)</th>
+                    <th>@Html.DisplayNameFor(model => model.Room)</th>
+                    <th>@Html.DisplayNameFor(model => model.EstimatedValue)</th>
+                    <th>@Html.DisplayNameFor(model => model.purchasedDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Description)</th>
+                    <th class="text-center" style="width: 240px;">Actions</th>
+                </tr>
+            </thead>
 
-                <td>
-                    <!--Actions on the side on the object in the view for the final crud operations-->
-                    <a asp-action="Edit"
-                       asp-route-id="@item.ItemId"
-                       class="btn btn-secondary btn-sm me-2">
-                        Edit
-                    </a>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Room)</td>
+                        <td>$@Html.DisplayFor(modelItem => item.EstimatedValue)</td>
+                        <td>@Html.DisplayFor(modelItem => item.purchasedDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
 
-                    <a asp-action="Details"
-                       asp-route-id="@item.ItemId"
-                       class="btn btn-info btn-sm me-2 text-white">
-                        Details
-                    </a>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.ItemId"
+                                   class="btn btn-secondary btn-sm">
+                                    Edit
+                                </a>
 
-                    <a asp-action="Delete"
-                       asp-route-id="@item.ItemId"
-                       class="btn btn-danger btn-sm">
-                        Delete
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                                <a asp-action="Details"
+                                   asp-route-id="@item.ItemId"
+                                   class="btn btn-info btn-sm text-white">
+                                    Details
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.ItemId"
+                                   class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+
+                        
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

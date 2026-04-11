@@ -12,13 +12,12 @@
 /// April 9 2026
 /// </date>
 /// <description>
-/// View for the lgoin page for users to log in to the application.
+/// View for the login page for users to log in to the application.
 /// </description>
 /// <references>
 /// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
 /// (Sixth, Ser. Deitel Development Series). Pearson Education.
 /// </references>
-///
 -->
 @model InsurancePal.Models.ViewModels.LoginViewModel
 
@@ -26,29 +25,35 @@
     ViewData["Title"] = "Login";
 }
 
-<!--Block for the main Login portion of page-->
-<h2>Login</h2>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 420px; border-radius: 12px;">
+        <h2 class="text-center mb-4">Login</h2>
 
-<form asp-action="Login" method="post">
-    <input asp-for="ReturnUrl" type="hidden" />
+        <form asp-action="Login" method="post">
+            <input asp-for="ReturnUrl" type="hidden" />
 
-    <!-- Username block-->
-    <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+            <!--Username block-->
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label fw-semibold"></label>
+                <input asp-for="Username" class="form-control form-control-lg" />
+                <span asp-validation-for="Username" class="text-danger small"></span>
+            </div>
+
+            <!--Password block-->
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label fw-semibold"></label>
+                <input asp-for="Password" class="form-control form-control-lg" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 mt-2">
+                Login
+            </button>
+        </form>
+
+        <div class="text-danger mt-3 text-center" asp-validation-summary="ModelOnly"></div>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Password" class="form-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-
-<div class="text-danger mt-2" asp-validation-summary="ModelOnly"></div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

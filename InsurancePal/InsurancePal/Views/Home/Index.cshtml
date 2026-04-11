@@ -18,7 +18,6 @@
 /// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition*
 /// (Sixth, Ser. Deitel Development Series). Pearson Education.
 /// </references>
-///
 -->
 @model InsurancePal.Models.HomeDashboardViewModel
 
@@ -26,48 +25,58 @@
     ViewData["Title"] = "Home";
 }
 
-<h1 class="mb-4">Welcome to InsurancePal</h1>
+<div class="container mt-4">
 
-<div class="row">
+    <h1 class="mb-4 fw-bold text-center">Welcome to InsurancePal</h1>
 
-    <div class="col-md-3 mb-3">
-        <div class="card text-white bg-primary">
-            <div class="card-body">
-                <h5 class="card-title">Total Items</h5>
-                <p class="card-text fs-3">@Model.TotalItems</p>
+    <div class="row g-4">
+
+        <!--Total Items-->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 text-white bg-primary rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Total Items</h5>
+                    <p class="card-text display-6 fw-bold">@Model.TotalItems</p>
+                </div>
             </div>
         </div>
+
+        <!--Total Value-->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 text-white bg-success rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Total Value</h5>
+                    <p class="card-text display-6 fw-bold">$@Model.TotalValue</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Rooms Covered-->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 text-white bg-info rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Rooms Covered</h5>
+                    <p class="card-text display-6 fw-bold">@Model.UniqueRooms</p>
+                </div>
+            </div>
+        </div>
+
+        <!--Categories Used-->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 text-white bg-secondary rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">Categories Used</h5>
+                    <p class="card-text display-6 fw-bold">@Model.UniqueCategories</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="col-md-3 mb-3">
-        <div class="card text-white bg-success">
-            <div class="card-body">
-                <h5 class="card-title">Total Value</h5>
-                <p class="card-text fs-3">$@Model.TotalValue</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-        <div class="card text-white bg-info">
-            <div class="card-body">
-                <h5 class="card-title">Rooms Covered</h5>
-                <p class="card-text fs-3">@Model.UniqueRooms</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3 mb-3">
-        <div class="card text-white bg-secondary">
-            <div class="card-body">
-                <h5 class="card-title">Categories Used</h5>
-                <p class="card-text fs-3">@Model.UniqueCategories</p>
-            </div>
-        </div>
+    <div class="text-center mt-5">
+        <a asp-controller="Item" asp-action="Index" class="btn btn-primary btn-lg px-4">
+            View Your Items
+        </a>
     </div>
 
 </div>
-
-<p class="mt-4">
-    <a asp-controller="Item" asp-action="Index" class="btn btn-primary btn-sm">View Your Items</a>
-</p>
