@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InsurancePal.Data;
 using InsurancePal.Models;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 using Microsoft.AspNetCore.Authorization;
 
 namespace InsurancePal.Controllers
@@ -21,12 +20,40 @@ namespace InsurancePal.Controllers
         {
             _context = context;
         }
+        private void PopulateDropdowns()
+        {
+            ViewBag.Categories = new List<string>
+            {
+                "Electronics",
+                "Furniture",
+                "Appliances",
+                "Jewelry",
+                "Clothing",
+                "Sports Equipment",
+                "Tools",
+                "Other"
+            };
+
+            ViewBag.Rooms = new List<string>
+            {
+                "Living Room",
+                "Kitchen",
+                "Master Bedroom",
+                "Bedroom 2",
+                "Bedroom 3",
+                "Bedroom 4",
+                "Bathroom",
+                "Basement",
+                "Garage",
+                "Office",
+                "Dining Room",
+                "Storage"
+            };
+        }
 
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            //Try to find items in the database that match the signed in users username with dbo.Items
-            //Will return a list of items that have a match with the OwnerID column.
             try
             {
                 var username = User.Identity?.Name;
@@ -42,20 +69,18 @@ namespace InsurancePal.Controllers
                 return Content(ex.ToString());
             }
         }
+
         // GET: Item/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var item = await _context.Items
                 .FirstOrDefaultAsync(m => m.ItemId == id);
+
             if (item == null)
-            {
                 return NotFound();
-            }
 
             return View(item);
         }
@@ -63,26 +88,27 @@ namespace InsurancePal.Controllers
         // GET: Item/Create
         public IActionResult Create()
         {
+            PopulateDropdowns();
             return View();
         }
 
         // POST: Item/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ItemId,Name,Category,Room,EstimatedValue,purchasedDate,Description")] Item item)
         {
+            PopulateDropdowns();
 
             item.OwnerID = User.Identity.Name;
             ModelState.Remove("OwnerID");
+
             if (ModelState.IsValid)
             {
-                
                 _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(item);
         }
 
@@ -90,29 +116,25 @@ namespace InsurancePal.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var item = await _context.Items.FindAsync(id);
             if (item == null)
-            {
                 return NotFound();
-            }
+
+            PopulateDropdowns();
             return View(item);
         }
 
         // POST: Item/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ItemId,Name,Category,Room,EstimatedValue,purchasedDate,Description,OwnerID")] Item item)
         {
+            PopulateDropdowns();
+
             if (id != item.ItemId)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -124,16 +146,14 @@ namespace InsurancePal.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ItemExists(item.ItemId))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(item);
         }
 
@@ -141,16 +161,13 @@ namespace InsurancePal.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var item = await _context.Items
                 .FirstOrDefaultAsync(m => m.ItemId == id);
+
             if (item == null)
-            {
                 return NotFound();
-            }
 
             return View(item);
         }
@@ -161,10 +178,9 @@ namespace InsurancePal.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var item = await _context.Items.FindAsync(id);
+
             if (item != null)
-            {
                 _context.Items.Remove(item);
-            }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

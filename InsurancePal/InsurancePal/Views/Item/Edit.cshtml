@@ -44,12 +44,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <select asp-for="Category" class="form-control" asp-items="@(new SelectList(ViewBag.Categories))"></select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Room" class="control-label"></label>
-                <input asp-for="Room" class="form-control" />
+                <select asp-for="Room" class="form-control" asp-items="@(new SelectList(ViewBag.Rooms))"></select>
                 <span asp-validation-for="Room" class="text-danger"></span>
             </div>
             <div class="form-group">
