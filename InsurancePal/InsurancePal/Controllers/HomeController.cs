@@ -1,56 +1,40 @@
-/// <file>
-/// HomeController.cs
-/// </file>
-/// <project>
-/// Windows Network Programming Assignment 4
-/// </project>
-/// <author>
-/// Nicholas Reilly
-/// </author>
-/// <date>
-/// April 9 2026
-/// </date>
-/// <description>
-/// Controller for the home page.
-/// </description>
-/// <references>
-/// Deitel, P., & Deitel, H. (2017). *C# 6 for Programmers Sixth Edition* 
-/// (Sixth, Ser. Deitel Development Series). Pearson Education.
-/// </references>
-/// 
-using InsurancePal.Models.ViewModels;
+using InsurancePal.Data;
+using InsurancePal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace InsurancePal.Controllers
 {
-    /// <summary>
-    /// HomeController class. Methods for the home page, privacy page, and error page.
-    /// </summary>
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ItemContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ItemContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var username = User.Identity?.Name;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            //Pull all items belonging to the logged-in user
+            var items = await _context.Items
+                .Where(i => i.OwnerID == username)
+                .ToListAsync();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //Build the dashboard model
+            var model = new HomeDashboardViewModel
+            {
+                TotalItems = items.Count,
+                TotalValue = items.Sum(i => i.EstimatedValue),
+                UniqueRooms = items.Select(i => i.Room).Distinct().Count(),
+                UniqueCategories = items.Select(i => i.Category).Distinct().Count()
+            };
+
+            return View(model);
         }
     }
 }
