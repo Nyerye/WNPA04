@@ -129,33 +129,39 @@ namespace InsurancePal.Controllers
         // POST: Item/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Name,Category,Room,EstimatedValue,purchasedDate,Description,OwnerID")] Item item)
+        public async Task<IActionResult> Edit(int id, Item updatedItem)
         {
+            //Populate the Category and Room drop down menus.
             PopulateDropdowns();
 
-            if (id != item.ItemId)
+            //Confirm the ID and the updateItems ID are both the same.
+            if (id != updatedItem.ItemId)
                 return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(item);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ItemExists(item.ItemId))
-                        return NotFound();
-                    else
-                        throw;
-                }
+            //Confirm that the item actually exists in the database.
+            var existingItem = await _context.Items.FindAsync(id);
+            if (existingItem == null)
+                return NotFound();
 
-                return RedirectToAction(nameof(Index));
-            }
+            //Update fields manually
+            existingItem.Name = updatedItem.Name;
+            existingItem.Category = updatedItem.Category;
+            existingItem.Room = updatedItem.Room;
+            existingItem.EstimatedValue = updatedItem.EstimatedValue;
+            existingItem.purchasedDate = updatedItem.purchasedDate;
+            existingItem.Description = updatedItem.Description;
 
-            return View(item);
+            //Preserve ownership of the item
+            existingItem.OwnerID = User.Identity.Name;
+
+            //Save the results back to the database
+            await _context.SaveChangesAsync();
+
+            //Send back to the Index page.
+            return RedirectToAction(nameof(Index));
         }
+
+
 
         // GET: Item/Delete/5
         public async Task<IActionResult> Delete(int? id)
